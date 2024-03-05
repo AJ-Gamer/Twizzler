@@ -1,16 +1,22 @@
 
 $(document).ready(() => {
   const $body = $('body');
-  $body.html('');
+  const $tweetsContainer = $('<div id="tweets-container"></div>');
+  $body.append($tweetsContainer);
 
-  const $tweets = streams.home.map((tweet) => {
-    const $tweet = $('<div></div>');
-    const text = `@${tweet.user}: ${tweet.message}`;
+  const updateTweets = () => {
+    $tweetsContainer.html('');
 
-    $tweet.text(text);
+    // Display tweets in reverse chronological order
+    const reversedTweets = streams.home.slice().reverse();
 
-    return $tweet;
-  });
-  $body.append($tweets);
+    reversedTweets.forEach((tweet) => {
+      const $tweet = $('<div class="tweet"></div>');
+      const $username = $(`<span class="username">@${tweet.user}</span>`);
+      const $message = $(`<span class="message">${tweet.message}</span>`);
+      const $timestamp = $(`<span class="timestamp">${moment(tweet.created_at).fromNow()}</span>`);
 
+      
+    })
+   }
 });
